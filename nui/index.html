@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/augmented-ui@2/augmented-ui.min.css">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="128157c685864bcae8bac195f57075f2ba08f9ac.css">    
+    </head>
+    <body>
+        <div id="actionmenuTattooShop" style="display: none;">
+            <main id="mainTattooShop">
+                <header>Loja de Tatuagem</header>
+                <div class="flexTattooShop">
+                    <aside>
+                        <div class="categoryTattooShop flex-centerTattooShop activeMTattooShop" onclick="selectTattooPart(this)" id="inicio" data-idpart="head" data-idmenu ="E"><i class="icon-rosto icon-fs2x"></i></div>
+                        <div class="categoryTattooShop flex-centerTattooShop" onclick="selectTattooPart(this)" data-idpart="torso" data-idmenu ="E"><i class="icon-torso icon-fs2x"></i></div>
+                        <div class="categoryTattooShop flex-centerTattooShop" onclick="selectTattooPart(this)" data-idpart="leftarm" data-idmenu ="E"><i class="icon-braco icon-fs2x"></i></div>
+                        <div class="categoryTattooShop flex-centerTattooShop" onclick="selectTattooPart(this)" data-idpart="rightarm" data-idmenu ="E"><i class="icon-braco icon-fs2x icon-horizontal"></i></div>
+                        <div class="categoryTattooShop flex-centerTattooShop" onclick="selectTattooPart(this)" data-idpart="leftleg" data-idmenu ="E"><i class="icon-perna icon-fs2x icon-horizontal"></i></div>
+                        <div class="categoryTattooShop flex-centerTattooShop" onclick="selectTattooPart(this)" data-idpart="rightleg" data-idmenu ="E"><i class="icon-perna icon-fs2x"></i></div>
+                        <div class="categoryTattooShop flex-centerTattooShop" onclick="selectTattooPart(this)" data-idpart="overlay" data-idmenu ="E"><i class="icon-cabelo icon-fs2x"></i></div>
+                        <div class="categoryTattooShop flex-centerTattooShop" onclick="selectTattooPart(this)" data-idpart="reset" data-idmenu ="E"><i class="icon-lixeira icon-fs2x"></i></div>
+                    </aside>
+                    <section>
+                        <div class="title">
+                            <div class="cart flex-centerTattooShop"><i class="fal fa-shopping-cart"></i></div>
+                            <div class="cart-info">
+                                <span>Bem vindo,</span>
+                                <small>seu carrinho: R$ <span id="precoTotalTattooShop">0</span>,00</small>
+                            </div>
+                            <div class="search">
+                                <small>pesquisar</small>
+                                <input placeholder="numero"  type="text" id="searchTattooShop" onkeyup="searchTattooShop('')">
+                            </div>
+                        </div>
+                        <div class="shop-content">
+                            <div class="listagemTattooShop">
+               
+
+                            </div>                             
+                        </div>
+     
+                        <div class="shop-footer">
+                            <div class="input-footer">
+                                <label>rotação do personagem</label><br>
+                                <input class='rangeTattooShop' type="range" id="rotacaoTattooShop" oninput="onRangeChange(this.value)" step="1" value="0" min="0" max="360">
+                            </div>
+                            <div class="action-buy" onClick="paymentTattooShop()">
+                                <div class="info-footer styleAug flex-centerTattooShop" data-augmented-ui="r-scoop">finalizar</div>
+                                <button class="flex-centerTattooShop"><i class="fal fa-shopping-bag"></i></button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+    
+            <camTattooShop>
+                <div class="item icon">
+                    <i class="fal fa-camcorder"></i>
+                </div>
+                <div class="item" onClick="shopChangeCam(0)">
+                    <i class="icon-rosto"></i>
+                </div>
+                <div class="item" onClick="shopChangeCam(1)">
+                    <i class="icon-torso"></i>
+                </div>
+                <div class="item" onClick="shopChangeCam(2)">
+                    <i class="icon-perna"></i>
+                </div>
+                <div class="item" onClick="shopChangeCam(3)">
+                    <i class="icon-corpo"></i>
+                </div>
+                <!-- <div class="item" onClick="shopChangeCam(4)">
+                    <i class="icon-pes"></i>
+                </div> -->
+            </camTattooShop>
+        </div>
+        
+
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    <script src="font.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        $('#rotacaoTattooShop').on('input', function(e){
+        var min = e.target.min,
+            max = e.target.max,
+            val = e.target.value;
+        
+            $(e.target).css({
+                'backgroundSize': (val - min) * 100 / (max - min) + '% 100%'
+            });
+        }); // .trigger('input')
+
+
+        let camTattooShop = true
+        $('camTattooShop .icon').on('click', function() {
+            if (camTattooShop) {
+                camTattooShop = false
+                $('camTattooShop .item:nth-child(2)').animate({opacity: 1}, 200);
+                $('camTattooShop .item:nth-child(3)').animate({opacity: 1}, 500);
+                $('camTattooShop .item:nth-child(4)').animate({opacity: 1}, 800);
+                $('camTattooShop .item:nth-child(5)').animate({opacity: 1}, 1100);
+                $('camTattooShop .item:nth-child(6)').animate({opacity: 1}, 1400);
+            } else {
+                camTattooShop = true
+                $('camTattooShop .item:nth-child(6)').animate({opacity: 0}, 200);
+                $('camTattooShop .item:nth-child(5)').animate({opacity: 0}, 500);
+                $('camTattooShop .item:nth-child(4)').animate({opacity: 0}, 800);
+                $('camTattooShop .item:nth-child(3)').animate({opacity: 0}, 1100);
+                $('camTattooShop .item:nth-child(2)').animate({opacity: 0}, 1400);
+            }
+        });
+    </script>
+</html>
